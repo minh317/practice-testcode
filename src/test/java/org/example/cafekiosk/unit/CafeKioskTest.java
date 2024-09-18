@@ -3,6 +3,7 @@ package org.example.cafekiosk.unit;
 import org.example.cafekiosk.unit.beverages.Americano;
 import org.example.cafekiosk.unit.beverages.Latte;
 import org.example.cafekiosk.unit.order.Order;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.time.LocalDateTime;
@@ -23,6 +24,7 @@ class CafeKioskTest {
 //        System.out.println(">>> 담긴 음료 : " + cafeKiosk.getBeverages().get(0).getName());
 //    }
 
+    @DisplayName("음료 1개 추가")
     @Test
     void add() {
         CafeKiosk cafeKiosk = new CafeKiosk();
@@ -113,13 +115,16 @@ class CafeKioskTest {
 
         cafeKiosk.add(americano);
 
-        assertThatThrownBy(() -> cafeKiosk.createOrder(LocalDateTime.of(2023, 1, 17, 9, 59)))
+        assertThatThrownBy(() -> cafeKiosk.createOrder(
+                LocalDateTime.of(2023, 1, 17, 9, 59)))
             .isInstanceOf(IllegalArgumentException.class)
             .hasMessage("주문 가능한 시간이 아닙니다. 관리자에게 문의하세요.");
     }
 
+    @DisplayName("주문 목록에 담긴 상품들의 총 금액을 계산할 수 있다.")
     @Test
     void calculateTotalPrice() {
+        // given
         CafeKiosk cafeKiosk = new CafeKiosk();
         Americano americano = new Americano();
         Latte latte = new Latte();
@@ -127,8 +132,10 @@ class CafeKioskTest {
         cafeKiosk.add(americano);
         cafeKiosk.add(latte);
 
+        // when
         int totalPrice = cafeKiosk.calculateTotalPrice();
 
+        // then
         assertThat(totalPrice).isEqualTo(8500);
     }
 }
