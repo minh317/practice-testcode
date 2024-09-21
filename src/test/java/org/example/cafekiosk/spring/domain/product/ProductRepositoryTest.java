@@ -3,7 +3,7 @@ package org.example.cafekiosk.spring.domain.product;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.test.context.ActiveProfiles;
 
 import java.util.List;
@@ -23,8 +23,8 @@ import static org.example.cafekiosk.spring.domain.product.ProductType.HANDMADE;
 
 
 @ActiveProfiles("test")
-//@DataJpaTest // @SpringBootTest 보다 가볍다. JPA와 관련된 설정들만 주입을 받아서 서버를 띄워준다.
-@SpringBootTest // 통합 테스트를 위해 제공하는 어노테이션
+@DataJpaTest // @SpringBootTest 보다 가볍다. JPA와 관련된 설정들만 주입을 받아서 서버를 띄워준다.
+//@SpringBootTest // 통합 테스트를 위해 제공하는 어노테이션
 class ProductRepositoryTest {
 
     @Autowired
