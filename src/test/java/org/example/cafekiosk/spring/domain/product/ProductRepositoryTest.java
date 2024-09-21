@@ -53,6 +53,30 @@ class ProductRepositoryTest {
                 );
     }
 
+    @DisplayName("주문 하려는 상품번호 리스트로 상품들을 조회한다.")
+    @Test
+    void findAllProductNumberIn() {
+
+        // given
+        Product product1 = createAmericano();
+        Product product2 = createLatte();
+        Product product3 = createBingsoo();
+
+        _productRepository.saveAll(List.of(product1, product2, product3));
+
+        // when
+        List<Product> products = _productRepository.findAllByProductNumberIn(List.of("001", "002"));
+
+        // then
+        assertThat(products).hasSize(2)
+                .extracting("productNumber", "name", "sellingStatus")
+                .containsExactly(
+                        tuple("001", "아메리카노", SELLING),
+                        tuple("002", "카페라떼", HOLD)
+                );
+    }
+
+
     private Product createBingsoo() {
         return Product.builder()
                 .productNumber("003")
