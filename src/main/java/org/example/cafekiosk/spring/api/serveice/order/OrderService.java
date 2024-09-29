@@ -1,7 +1,7 @@
 package org.example.cafekiosk.spring.api.serveice.order;
 
 import lombok.RequiredArgsConstructor;
-import org.example.cafekiosk.spring.api.controller.order.request.OrderCreateRequest;
+import org.example.cafekiosk.spring.api.serveice.order.request.OrderCreateServiceRequest;
 import org.example.cafekiosk.spring.api.serveice.order.response.OrderResponse;
 import org.example.cafekiosk.spring.domain.order.Order;
 import org.example.cafekiosk.spring.domain.order.OrderRepository;
@@ -36,7 +36,7 @@ public class OrderService {
      * @return
      */
     @Transactional
-    public OrderResponse createOrder(OrderCreateRequest request, LocalDateTime registeredDateTime) {
+    public OrderResponse createOrder(OrderCreateServiceRequest request, LocalDateTime registeredDateTime) {
 
         List<String> productNumbers = request.getProductNumbers();
         List<Product> products = findProductsBy(productNumbers);
