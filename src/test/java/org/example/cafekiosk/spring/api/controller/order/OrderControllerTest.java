@@ -43,7 +43,7 @@ class OrderControllerTest {
                 .build();
 
         OrderResponse result = OrderResponse.builder().build();
-        when(_orderService.createOrder(request, LocalDateTime.now())).thenReturn(result);
+        when(_orderService.createOrder(request.toServiceRequest(), LocalDateTime.now())).thenReturn(result);
 
         // when & then
         _mockMvc.perform(  // perform : API를 수행한다.
@@ -68,7 +68,7 @@ class OrderControllerTest {
                 .build();
 
         OrderResponse result = OrderResponse.builder().build();
-        when(_orderService.createOrder(request, LocalDateTime.now())).thenReturn(result);
+        when(_orderService.createOrder(request.toServiceRequest(), LocalDateTime.now())).thenReturn(result);
 
         // when & then
         _mockMvc.perform(  // perform : API를 수행한다.

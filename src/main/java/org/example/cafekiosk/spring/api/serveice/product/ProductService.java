@@ -6,15 +6,11 @@ import org.example.cafekiosk.spring.api.serveice.product.response.ProductRespons
 import org.example.cafekiosk.spring.domain.product.Product;
 import org.example.cafekiosk.spring.domain.product.ProductRepository;
 import org.example.cafekiosk.spring.domain.product.ProductSellingStatus;
-import org.example.cafekiosk.spring.domain.product.ProductType;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.stream.Collectors;
-
-import static org.example.cafekiosk.spring.domain.product.ProductSellingStatus.SELLING;
-import static org.example.cafekiosk.spring.domain.product.ProductType.HANDMADE;
 
 /**
  * CQRS - Command / Query Responsibility Segregation (명령과 조회의 책임을 분리)
@@ -33,7 +29,7 @@ public class ProductService {
     public ProductResponse createProduct(ProductCreateRequest request) {
         String nextProductNumber = createNextProductNumber();
 
-        Product product = request.toEntity(nextProductNumber);
+        Product product = request.toServiceRequest().toEntity(nextProductNumber);
         Product savedProduct = _productRepository.save(product);
 
         return ProductResponse.of(savedProduct);

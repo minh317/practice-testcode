@@ -7,7 +7,7 @@ import lombok.NoArgsConstructor;
 import java.util.List;
 
 @Getter
-@@NoArgsConstructor
+@NoArgsConstructor
 public class OrderCreateServiceRequest {
 
     private List<String> productNumbers;
@@ -16,5 +16,4 @@ public class OrderCreateServiceRequest {
     private OrderCreateServiceRequest(List<String> productNumbers) {
         this.productNumbers = productNumbers;
     }
-
 }
