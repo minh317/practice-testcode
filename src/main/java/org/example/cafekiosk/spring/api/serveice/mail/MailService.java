@@ -10,12 +10,12 @@ import org.springframework.stereotype.Service;
 @Service
 public class MailService {
 
-    final MailSendClient mailSendClient;
+    final MailSendClient _mailSendClient;
     final MailSendHistoryRepository _mailSendHistoryRepository;
 
     public boolean send(String from, String to, String subject, String content) {
 
-        boolean result = mailSendClient.send(from, to, subject, content);
+        boolean result = _mailSendClient.send(from, to, subject, content);
         if (result) {
             _mailSendHistoryRepository.save(MailSendHistory.builder()
                     .from(from)
@@ -23,6 +23,10 @@ public class MailService {
                     .subject(subject)
                     .content(content)
                     .build());
+
+            _mailSendClient.a();
+            _mailSendClient.b();
+            _mailSendClient.c();
 
             return true;
         }
