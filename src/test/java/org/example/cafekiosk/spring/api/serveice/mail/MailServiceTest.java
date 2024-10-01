@@ -6,9 +6,9 @@ import org.example.cafekiosk.spring.domain.history.mail.MailSendHistoryRepositor
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.BDDMockito;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.Spy;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -18,8 +18,8 @@ import static org.mockito.Mockito.*;
 @ExtendWith(MockitoExtension.class)
 class MailServiceTest {
 
-//    @Mock
-    @Spy
+    @Mock
+//    @Spy
     private MailSendClient _mailSendClient;
 
     @Mock
@@ -53,9 +53,12 @@ class MailServiceTest {
 //        when(_mailSendClient.send(anyString(), any(String.class), any(String.class), any(String.class)))
 //                .thenReturn(true);
 
-        doReturn(true)
-                .when(_mailSendClient)
-                .send(any(String.class), any(String.class), any(String.class), any(String.class));
+        BDDMockito.given(_mailSendClient.send(anyString(), anyString(), anyString(), anyString()))
+                .willReturn(true);
+
+//        doReturn(true)
+//                .when(_mailSendClient)
+//                .send(any(String.class), any(String.class), any(String.class), any(String.class));
 
         // 위 RETURN_DEFAULTS에 의해 null을 리턴하므로, 아래 코드는 필요 없다.
 //        when(mailSendHistoryRepository.save(any(MailSendHistory.class)))
