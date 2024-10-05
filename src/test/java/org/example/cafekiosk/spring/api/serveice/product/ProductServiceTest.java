@@ -6,6 +6,8 @@ import org.example.cafekiosk.spring.domain.product.Product;
 import org.example.cafekiosk.spring.domain.product.ProductRepository;
 import org.example.cafekiosk.spring.domain.product.ProductSellingStatus;
 import org.example.cafekiosk.spring.domain.product.ProductType;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,6 +31,16 @@ class ProductServiceTest {
 
     @Autowired
     private ProductRepository _productRepository;
+
+    @BeforeAll
+    static void beforeAll() {
+        // before class
+    }
+
+    @BeforeEach
+    void setUp() {
+        // before method
+    }
 
     @Transactional
     @Test

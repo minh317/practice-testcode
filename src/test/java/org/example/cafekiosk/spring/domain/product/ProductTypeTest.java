@@ -2,6 +2,12 @@ package org.example.cafekiosk.spring.domain.product;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.CsvSource;
+import org.junit.jupiter.params.provider.MethodSource;
+
+import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -65,4 +71,52 @@ class ProductTypeTest {
         assertThat(result).isTrue();
     }
 
+    @DisplayName("상품의 타입이 재고와 관련된 타입인지 체크한다.")
+    @Test
+    void containsStockType() {
+        // given
+        ProductType handMade = ProductType.HANDMADE;
+        ProductType bakery = ProductType.BAKERY;
+        ProductType bottle = ProductType.BOTTLE;
+
+        // when
+        boolean result1 = ProductType.containsStockType(handMade);
+        boolean result2 = ProductType.containsStockType(bakery);
+        boolean result3 = ProductType.containsStockType(bottle);
+
+        // then
+        assertThat(result1).isFalse();
+        assertThat(result2).isTrue();
+        assertThat(result3).isTrue();
+    }
+
+    @DisplayName("상품의 타입이 재고와 관련된 타입인지 체크한다. (with CsvSource)")
+    @CsvSource({"HANDMADE, false", "BAKERY, true", "BOTTLE, true"})
+    @ParameterizedTest
+    void containsStockTypWithCsvSource(ProductType productType, boolean expected) {
+        // when
+        boolean result = ProductType.containsStockType(productType);
+
+        // then
+        assertThat(result).isEqualTo(expected);
+    }
+
+    private static Stream<Arguments> provideProductTypesForCheckingStockType() {
+        return Stream.of(
+                Arguments.of(ProductType.HANDMADE, false),
+                Arguments.of(ProductType.BAKERY, true),
+                Arguments.of(ProductType.BOTTLE, true)
+        );
+    }
+
+    @DisplayName("상품의 타입이 재고와 관련된 타입인지 체크한다. (with MethodSource)")
+    @MethodSource("provideProductTypesForCheckingStockType")
+    @ParameterizedTest
+    void containsStockTypWithMethodSource(ProductType productType, boolean expected) {
+        // when
+        boolean result = ProductType.containsStockType(productType);
+
+        // then
+        assertThat(result).isEqualTo(expected);
+    }
 }
