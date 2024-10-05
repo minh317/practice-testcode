@@ -1,16 +1,11 @@
 package org.example.cafekiosk.spring.api.controller.order;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
+import org.example.cafekiosk.spring.api.ControllerTestSupport;
 import org.example.cafekiosk.spring.api.controller.order.request.OrderCreateRequest;
-import org.example.cafekiosk.spring.api.serveice.order.OrderService;
 import org.example.cafekiosk.spring.api.serveice.order.response.OrderResponse;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
-import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
-import org.springframework.test.web.servlet.MockMvc;
 
 import java.time.LocalDateTime;
 import java.util.Collections;
@@ -22,17 +17,8 @@ import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-@WebMvcTest(controllers = OrderController.class)
-class OrderControllerTest {
 
-    @Autowired
-    MockMvc _mockMvc;
-
-    @Autowired
-    ObjectMapper _objectMapper;
-
-    @MockBean
-    OrderService _orderService;
+class OrderControllerTest extends ControllerTestSupport {
 
     @DisplayName("신규 주문을 등록한다.")
     @Test

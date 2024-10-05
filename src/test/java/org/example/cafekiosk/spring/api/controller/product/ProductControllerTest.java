@@ -1,16 +1,11 @@
 package org.example.cafekiosk.spring.api.controller.product;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
+import org.example.cafekiosk.spring.api.ControllerTestSupport;
 import org.example.cafekiosk.spring.api.controller.product.dto.request.ProductCreateRequest;
-import org.example.cafekiosk.spring.api.serveice.product.ProductService;
 import org.example.cafekiosk.spring.api.serveice.product.response.ProductResponse;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
-import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
-import org.springframework.test.web.servlet.MockMvc;
 
 import java.util.List;
 
@@ -27,17 +22,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
  * Controller 관련 빈들만 올릴 수 있는 어노테이션 (MockMvc는 WebMvcTest가 있어야 사용 가능)
  *
  */
-@WebMvcTest(controllers = ProductController.class)
-class ProductControllerTest {
-
-    @Autowired
-    private MockMvc mockMvc;
-
-    @Autowired
-    private ObjectMapper objectMapper;
-
-    @MockBean
-    private ProductService _productService;
+class ProductControllerTest extends ControllerTestSupport {
 
     @DisplayName("신규 상품을 등록한다.")
     @Test
@@ -52,9 +37,9 @@ class ProductControllerTest {
 
 
         // when & then
-        mockMvc.perform(  // perform : API를 수행한다.
+        _mockMvc.perform(  // perform : API를 수행한다.
                     post("/api/v1/products/new")
-                        .content(objectMapper.writeValueAsString(request))
+                        .content(_objectMapper.writeValueAsString(request))
                         .contentType(MediaType.APPLICATION_JSON)
                 )
                 .andDo(print())
@@ -69,7 +54,7 @@ class ProductControllerTest {
         when(_productService.getSellingProducts()).thenReturn(result);
 
         // when & then
-        mockMvc.perform(
+        _mockMvc.perform(
                     get("/api/v1/products/selling")
 //                    .queryParam("name", "이름")
                 )
@@ -94,9 +79,9 @@ class ProductControllerTest {
 
 
         // when & then
-        mockMvc.perform(  // perform : API를 수행한다.
+        _mockMvc.perform(  // perform : API를 수행한다.
                         post("/api/v1/products/new")
-                                .content(objectMapper.writeValueAsString(request))
+                                .content(_objectMapper.writeValueAsString(request))
                                 .contentType(MediaType.APPLICATION_JSON)
                 )
                 .andDo(print())
@@ -120,9 +105,9 @@ class ProductControllerTest {
 
 
         // when & then
-        mockMvc.perform(  // perform : API를 수행한다.
+        _mockMvc.perform(  // perform : API를 수행한다.
                         post("/api/v1/products/new")
-                                .content(objectMapper.writeValueAsString(request))
+                                .content(_objectMapper.writeValueAsString(request))
                                 .contentType(MediaType.APPLICATION_JSON)
                 )
                 .andDo(print())
@@ -146,9 +131,9 @@ class ProductControllerTest {
 
 
         // when & then
-        mockMvc.perform(  // perform : API를 수행한다.
+        _mockMvc.perform(  // perform : API를 수행한다.
                         post("/api/v1/products/new")
-                                .content(objectMapper.writeValueAsString(request))
+                                .content(_objectMapper.writeValueAsString(request))
                                 .contentType(MediaType.APPLICATION_JSON)
                 )
                 .andDo(print())
@@ -172,9 +157,9 @@ class ProductControllerTest {
 
 
         // when & then
-        mockMvc.perform(  // perform : API를 수행한다.
+        _mockMvc.perform(  // perform : API를 수행한다.
                         post("/api/v1/products/new")
-                                .content(objectMapper.writeValueAsString(request))
+                                .content(_objectMapper.writeValueAsString(request))
                                 .contentType(MediaType.APPLICATION_JSON)
                 )
                 .andDo(print())

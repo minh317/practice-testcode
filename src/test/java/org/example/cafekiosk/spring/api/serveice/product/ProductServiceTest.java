@@ -1,5 +1,6 @@
 package org.example.cafekiosk.spring.api.serveice.product;
 
+import org.example.cafekiosk.spring.IntegrationTestSupport;
 import org.example.cafekiosk.spring.api.controller.product.dto.request.ProductCreateRequest;
 import org.example.cafekiosk.spring.api.serveice.product.response.ProductResponse;
 import org.example.cafekiosk.spring.domain.product.Product;
@@ -11,8 +12,6 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.ActiveProfiles;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
@@ -22,9 +21,7 @@ import static org.assertj.core.api.Assertions.tuple;
 import static org.example.cafekiosk.spring.domain.product.ProductSellingStatus.*;
 import static org.example.cafekiosk.spring.domain.product.ProductType.HANDMADE;
 
-@ActiveProfiles("test")
-@SpringBootTest
-class ProductServiceTest {
+class ProductServiceTest extends IntegrationTestSupport {
 
     @Autowired
     private ProductService _productService;

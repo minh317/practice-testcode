@@ -1,6 +1,6 @@
 package org.example.cafekiosk.spring.api.serveice.order;
 
-import org.example.cafekiosk.spring.client.mail.MailSendClient;
+import org.example.cafekiosk.spring.IntegrationTestSupport;
 import org.example.cafekiosk.spring.domain.history.mail.MailSendHistory;
 import org.example.cafekiosk.spring.domain.history.mail.MailSendHistoryRepository;
 import org.example.cafekiosk.spring.domain.order.Order;
@@ -13,9 +13,6 @@ import org.example.cafekiosk.spring.domain.product.ProductType;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.test.mock.mockito.MockBean;
-import org.springframework.test.context.ActiveProfiles;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDate;
@@ -28,9 +25,7 @@ import static org.example.cafekiosk.spring.domain.product.ProductType.HANDMADE;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 
-@ActiveProfiles("test")
-@SpringBootTest
-class OrderStatisticsServiceTest {
+class OrderStatisticsServiceTest extends IntegrationTestSupport {
 
     @Autowired
     OrderStatisticsService orderStatisticsService;
@@ -46,9 +41,6 @@ class OrderStatisticsServiceTest {
 
     @Autowired
     MailSendHistoryRepository _mailSendHistoryRepository;
-
-    @MockBean
-    MailSendClient _mailSendClient;
 
     @Transactional
     @DisplayName("결제완료 주문들을 조회하여 매출 통계 메일을 전송한다.")

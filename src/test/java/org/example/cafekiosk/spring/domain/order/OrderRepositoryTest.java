@@ -1,13 +1,12 @@
 package org.example.cafekiosk.spring.domain.order;
 
 import org.assertj.core.api.Assertions;
+import org.example.cafekiosk.spring.IntegrationTestSupport;
 import org.example.cafekiosk.spring.domain.product.Product;
 import org.example.cafekiosk.spring.domain.product.ProductRepository;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.ActiveProfiles;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
@@ -17,9 +16,7 @@ import static org.assertj.core.api.Assertions.tuple;
 import static org.example.cafekiosk.spring.domain.product.ProductSellingStatus.SELLING;
 import static org.example.cafekiosk.spring.domain.product.ProductType.HANDMADE;
 
-@ActiveProfiles("test")
-@SpringBootTest
-class OrderRepositoryTest {
+class OrderRepositoryTest extends IntegrationTestSupport {
 
     @Autowired
     ProductRepository _productRepository;
